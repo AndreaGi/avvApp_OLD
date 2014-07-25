@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+<head>
+    <title>AvvAPP</title>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/select2/3.5.0/select2.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/select2/3.5.0/select2-bootstrap.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../style/document.css">
+    <link rel="stylesheet" href="../style/common.css">
+    <style>
+        body 		{ padding-top:80px; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+            <div class="col-sm-4">
+                <div id="menu">
+                    <div class="infoBar">
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-8" >
+                <h2 id="pageTitle"><span class="fa fa-file-text"></span> Nuova Pratica</h2>
+                <select id="clientPicker" class="clientPicker picker">
+                    <option></option>
+                </select>
+                <select id="catPicker" class="catPicker picker">
+                    <option></option>
+                </select>
+
+                <div class="clearer"></div>
+
+                <textarea id="body" class="form-control" rows="4">
+
+                </textarea>
+
+                <h3>Completata</h3>
+
+                <div class="clearer"></div>
+
+                <div class="settings">
+                    <button type="button" class="btn btn-default" onclick="history.back()" style="width: 25%;">
+                        <h3><span class="fa fa-reply"></span> Indietro</h3>
+                    </button>
+                    <button type="button" class="btn btn-default" onclick="location.href='home'" style="width:73%; float: right">
+                        <h3><span class="fa fa-file-text"></span> Aggiungi pratica</h3>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../app/javascript/document.js"></script>
+    <script src="//cdn.jsdelivr.net/select2/3.4.8/select2.min.js"></script>
+
+</body>
+</html>

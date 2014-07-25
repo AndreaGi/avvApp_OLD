@@ -1,0 +1,18 @@
+div.settings button{
+    clear: both;
+    max-width: 100%;
+    margin-top: 7px;
+}
+
+div.settings{
+    margin-bottom: 20px;
+}
+
+button h3{
+    padding: 0px;
+    margin: 0px 0px;
+}
+
+div.clearer{
+    clear: both;
+}

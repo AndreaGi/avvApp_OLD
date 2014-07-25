@@ -1,0 +1,87 @@
+<!doctype html>
+<html>
+<head>
+    <title>AvvAPP</title>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../style/setup.css">
+    <link rel="stylesheet" href="../style/common.css">
+    <!-- Color Selector -->
+    <link rel="stylesheet" href="http://mjolnic.github.io/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css">
+    <link rel="stylesheet" href="http://mjolnic.github.io/bootstrap-colorpicker/src/css/docs.css">
+    <link rel="stylesheet" href="http://timschlechter.github.io/bootstrap-tagsinput/dist/bootstrap-tagsinput.css">
+    <style>
+        body 		{ padding-top:80px; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+            <div class="col-sm-4">
+                <div id="menu">
+                    <div class="infoBar">
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <h2><span class="fa fa-cogs"></span> Setup</h2>
+                <h3>Categorie</h3>
+                <form action="/addCategory" method="PUT" id="addCategory">
+                    <input id="catName" type="text" class="form-control" value="Nome"/>
+                    <div class="input-group" id="colorPicker">
+                        <input type="hidden" value="" class="form-control" id="catColor" />
+                        <span class="input-group-addon"><i></i></span>
+                            <span class="input-group-btn">
+                            <button class="btn btn-default" type="button" id="btnAddCat" rel="<%=user._id%>">Add</button>
+                          </span>
+                    </div>
+                </form>
+                <div class="clearer"></div>
+                <div id="categories" class="well" style="width: 100%; margin-top: 5px;">
+                </div>
+
+
+                <h3 style="padding-top: 20px;">Clienti</h3>
+                <form action="/addClient" method="PUT" id="addClient">
+                    <input id="clientName" type="text" class="form-control" value="Nome"/>
+                    <input id="vatNumber" type="text" class="form-control" value="P. IVA" style="margin-top: 4px"/>
+                    <input type="hidden" id="clientId"/>
+                    <button class="btn btn-default" type="button" id="btnAddClient" rel="<%=user._id%>">Aggiungi</button>
+                </form>
+                <div class="clearer"></div>
+                <div id="clients" class="well" style="width: 100%; margin-top: 5px;">
+                </div>
+
+                <h3 style="padding-top: 20px;" id="showComplete">
+
+                    Visualizza Completate</h3>
+
+                <div class="settings">
+                    <button type="button" class="btn btn-default" onclick="history.back()" style="width: 25%;">
+                        <h3><span class="fa fa-reply"></span> Indietro</h3>
+                    </button>
+                    <button type="button" class="btn btn-default" onclick="location.href='document'" style="width:73%; float: right">
+                        <h3><span class="fa fa-file-text"></span> Aggiungi pratica</h3>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../app/javascript/setup.js"></script>
+    <script src="http://mjolnic.github.io/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.js"></script>
+    <script src="http://mjolnic.github.io/bootstrap-colorpicker/src/js/docs.js"></script>
+    <script src="http://timschlechter.github.io/bootstrap-tagsinput/dist/bootstrap-tagsinput.js"></script>
+
+    <script type="text/javascript">
+        $(function(){
+            $('#colorPicker').colorpicker();
+        });
+    </script>
+
+</body>
+</html>

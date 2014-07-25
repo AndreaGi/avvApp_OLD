@@ -1,0 +1,48 @@
+#catName {
+    border-radius: 4px 0 0 4px;
+    float: left;
+    max-width: 442px;
+}
+
+#colorPicker{
+    float: right;
+    height: 34px;
+    width: 40px;
+}
+
+#colorPicker .input-group-addon{
+    border-left: 1px solid #ccc;
+}
+
+div.clearer{
+    width: 100%;
+    height: 1px;
+    clear: both;
+}
+
+.label{
+    display: inline-block !important;
+    margin-left: 5px !important;
+    font-size: 12px !important;
+}
+
+.label i{
+    margin-left: 4px;
+}
+
+.label i:hover{
+    cursor: pointer;
+}
+
+#addClient{
+    text-align: center;
+}
+
+#addClient button{
+    margin-top: 4px;
+    width: 100%;
+}
+
+#showComplete i:hover{
+    cursor: pointer;
+}

@@ -1,0 +1,24 @@
+.picker{
+    width: 49%;
+    margin-top: 20px;
+    height: 40px !IMPORTANT;
+}
+
+textarea#body{
+    width: 100%;
+    resize: vertical;
+    margin-top: 8px;
+}
+
+.clientPicker{
+    float: left;
+}
+
+.catPicker{
+    float: right;
+}
+
+.select2-container .select2-choice {
+    line-height: 40px !important;
+    height: 40px !important;
+}

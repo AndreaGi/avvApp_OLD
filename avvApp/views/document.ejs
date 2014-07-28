@@ -25,32 +25,83 @@
                 </div>
             </div>
             <div class="col-sm-8" >
+                <% if(document == null){%>
+
+                <!-- New DOCUMENT -->
+
                 <h2 id="pageTitle"><span class="fa fa-file-text"></span> Nuova Pratica</h2>
-                <select id="clientPicker" class="clientPicker picker">
-                    <option></option>
-                </select>
-                <select id="catPicker" class="catPicker picker">
-                    <option></option>
-                </select>
 
-                <div class="clearer"></div>
+                <form action="/addDocument" method="PUT" id="addDocument">
+                    <input type="hidden" id="documentId" />
+                    <h3>Title</h3>
+                    <input type="text" id="docTitle" class="form-control">
 
-                <textarea id="body" class="form-control" rows="4">
+                    <select id="clientPicker" class="clientPicker picker">
+                        <option></option>
+                    </select>
+                    <select id="catPicker" class="catPicker picker">
+                        <option></option>
+                    </select>
 
-                </textarea>
+                    <div class="clearer"></div>
 
-                <h3>Completata</h3>
 
-                <div class="clearer"></div>
+                    <textarea id="body" class="form-control" rows="4">
 
-                <div class="settings">
-                    <button type="button" class="btn btn-default" onclick="history.back()" style="width: 25%;">
-                        <h3><span class="fa fa-reply"></span> Indietro</h3>
-                    </button>
-                    <button type="button" class="btn btn-default" onclick="location.href='home'" style="width:73%; float: right">
-                        <h3><span class="fa fa-file-text"></span> Aggiungi pratica</h3>
-                    </button>
-                </div>
+                    </textarea>
+
+                    <% if(document != null){%>
+                    <h3>Completata</h3>
+                    <%}%>
+
+                    <div class="clearer"></div>
+
+                    <div class="settings">
+                        <button type="button" class="btn btn-default" onclick="location.href='home'" style="width: 25%;">
+                            <h3><span class="fa fa-reply"></span> Indietro</h3>
+                        </button>
+                        <button id="btnInsertDoc" type="button" class="btn btn-default" style="width:73%; float: right">
+                            <h3><span class="fa fa-file-text"></span> Aggiungi pratica</h3>
+                        </button>
+                    </div>
+                </form>
+
+                <%}else{%>
+
+                <!-- Existing Document -->
+                <h2 id="pageTitle"><span class="fa fa-file-text"></span><%=document.title%></h2>
+                <form action="/addDocument" method="PUT" id="addDocument">
+                <input type="hidden" id="documentId" value="<%=document._id%>" />
+
+                    <input type="text" id="docTitle" class="form-control">
+
+                    <select id="clientPicker" class="clientPicker picker">
+                        <option></option>
+                    </select>
+                    <select id="catPicker" class="catPicker picker">
+                        <option></option>
+                    </select>
+
+                    <div class="clearer"></div>
+
+                    <textarea id="body" class="form-control" rows="4">
+
+                    </textarea>
+
+                    <div class="clearer"></div>
+
+                    <div class="settings">
+                        <button type="button" class="btn btn-default" onclick="location.href='home'" style="width: 25%;">
+                            <h3><span class="fa fa-reply"></span> Indietro</h3>
+                        </button>
+                        <button id="btnInsertDoc" type="button" class="btn btn-default" style="width:73%; float: right">
+                            <h3><span class="fa fa-file-text"></span> Aggiorna</h3>
+                        </button>
+                    </div>
+                </form>
+
+                <%}%>
+
             </div>
         </div>
     </div>

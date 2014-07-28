@@ -11,7 +11,7 @@ var configAuth = require('./auth'); // use this one for testing
 // Default category
 var categoryComplete = {
     name: "Completate",
-    color: "#ddd"
+    color: "#4CBB17"
 }
 
 module.exports = function(passport) {

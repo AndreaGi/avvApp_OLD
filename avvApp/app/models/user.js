@@ -23,6 +23,7 @@ var userSchema = mongoose.Schema({
         categoryId  :String,
         clientId    :String,
         isComplete  :Boolean,
+        title       :String,
         body        :String,
         creationDate: {type:Date, default:Date.now},
         modificationDate: {type:Date, default:Date.now}

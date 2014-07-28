@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>AvvAPP</title>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
     <link rel="stylesheet" href="../style/home.css">
@@ -31,8 +31,76 @@
 
                 <% if(user.documents.length > 0){
 
-                    var categories =  user.documents;
+                    var completeCategory = "";
+                    var categories =  user.categories;
+
+                for(var i=0 ; i<categories.length; i++){
+                    var category = categories[i];
+                    if( category.name != "Completate" ){ %>
+                <div class="panel panel-default ">
+                    <div class="panel-heading">
+                        <h3 class="catTitle" style="color:<%=category.color%>"><%=category.name%></h3>
+                    </div>
+                    <ul class="table sortable" rel="<%=category._id%>">
+
+                        <% var documents = [];
+                           for( var index = 0; index < user.documents.length; index++){
+                               var document = user.documents[index];
+                               if(document.categoryId == category._id) {
+                                   var client = "";
+                                   user.clients.forEach(function (elem, index) {
+                                       if (elem._id == document.clientId) {
+                                           client = elem;
+                                       }
+                                   });
+                        %>
+                        <li class="draggable">
+                            <h4 class="catTitle"><i class="fa fa-bars"></i><%=client.name%> - <%=document.title%><i rel="<%=document._id%>" class="fa fa-chevron-right"></i></h4>
+                        </li>
+
+                       <%            }
+
+                                }
+                        %>
+                        </ul>
+                </div>
+                <%
+                    }else{ completeCategory = categories[i]}
                 %>
+
+                <% }
+                    if( user.showComplete){
+                %>
+                <div class="panel panel-default ">
+                    <div class="panel-heading">
+                        <h3 class="catTitle" style="color:<%=completeCategory.color%>"><%=completeCategory.name%></h3>
+                    </div>
+                    <ul class="table sortable" rel="<%=completeCategory._id%>">
+                        <% var documents = [];
+                                for( var index = 0; index < user.documents.length; index++){
+                            var document = user.documents[index];
+                                if(document.categoryId == completeCategory._id) {
+                            var client = "";
+                            user.clients.forEach(function (elem, index) {
+                                if (elem._id == document.clientId) {
+                                    client = elem;
+                                }
+                            });
+                        %>
+                        <li class="draggable">
+                            <h4 class="catTitle"><i class="fa fa-bars"></i><%=client.name%> - <%=document.title%><i rel="<%=document._id%>" class="fa fa-chevron-right"></i></h4>
+                        </li>
+
+                        <%            }
+
+                        }
+                        %>
+                    </ul>
+                </div>
+                <%
+                }
+                 %>
+
 
                 <%}else{%>
                 <p class="well" style="background-color: #f2dede;">Non ci sono pratiche da visualizzare</p>
@@ -54,6 +122,8 @@
         </div>
     </div>
 </div>
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/jquery-ui.min.js"></script>
+<script type="text/javascript" src="/app/javascript/home.js"></script>
 <script type="text/javascript">
     var today = new Date();
     var dd = today.getDate();

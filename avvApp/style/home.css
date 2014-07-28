@@ -15,3 +15,68 @@ p.bg-danger{
     vertical-align: middle;
     padding-left: 5px;
 }
+
+.catTitle{
+    padding-top: 0px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+}
+
+table tr td h4 i.fa-bars{
+    padding-right: 8px;
+}
+
+table tr td h4 i.fa-bars:hover{
+    cursor: move;
+    cursor: -webkit-grab;
+    cursor: -moz-grab;
+}
+table tr td h4 i.fa-bars:active{
+    cursor: move;
+    cursor: -webkit-grabbing;
+    cursor: -moz-grabbing;
+}
+
+.sortable {
+    border: 1px solid #eee;
+    width: 100%;
+    min-height: 20px;
+    list-style-type: none;
+    margin: 0;
+    padding: 5px 0 0 0;
+    margin-right: 10px;
+}
+.sortable li {
+    margin: 0 5px 5px 5px;
+    padding: 5px;
+    font-size: 1.2em;
+    width: 100%;
+}
+
+ul li i.fa-bars{
+    padding-right: 8px;
+}
+ul li i.fa-chevron-right{
+    float: right;
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+ul li i.fa-chevron-right:hover{
+    cursor: pointer;
+}
+
+.fa-bars:hover{
+    cursor: move;
+    cursor: -webkit-grab;
+    cursor: -moz-grab;
+    cursor: url(https://mail.google.com/mail/images/2/openhand.cur) 8 8, move;
+}
+
+.fa-bars:active{
+    cursor: -webkit-grabbing;
+    cursor: -webkit-grabbing;
+    cursor: url(https://mail.google.com/mail/images/2/closedhand.cur) 8 8, move;
+}
+

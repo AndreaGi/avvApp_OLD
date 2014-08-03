@@ -22,3 +22,19 @@ textarea#body{
     line-height: 40px !important;
     height: 40px !important;
 }
+
+#isComplete{
+    margin-left: 4px;
+}
+
+#isComplete i{
+    padding-right: 7px !important;
+}
+
+#pageTitle{
+    margin-left: 4px;
+}
+
+#pageTitle span.fa{
+    padding-right: 7px;
+}

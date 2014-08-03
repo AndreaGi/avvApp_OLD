@@ -8,12 +8,6 @@ var User       = require('../app/models/user');
 // load the auth variables
 var configAuth = require('./auth'); // use this one for testing
 
-// Default category
-var categoryComplete = {
-    name: "Completate",
-    color: "#4CBB17"
-}
-
 module.exports = function(passport) {
 
     // =========================================================================
@@ -102,7 +96,6 @@ module.exports = function(passport) {
                         newUser.local.email    = email;
                         newUser.local.password = newUser.generateHash(password);
 
-                        newUser.categories = [categoryComplete];
                         newUser.showComplete = true;
 
                         newUser.save(function(err) {
@@ -181,7 +174,6 @@ module.exports = function(passport) {
                         newUser.google.name  = profile.displayName;
                         newUser.google.email = (profile.emails[0].value || '').toLowerCase(); // pull the first email
 
-                        newUser.categories = [categoryComplete];
                         newUser.showComplete = true;
 
                         newUser.save(function(err) {

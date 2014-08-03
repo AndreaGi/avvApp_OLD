@@ -110,7 +110,7 @@ function addCategory(event) {
             if (response.msg === '') {
 
                 // Clear the form inputs
-                $('#addCategory #catName').val('Insert name');
+                $('#addCategory #catName').val('Nome');
 
                 // Update the table
                 updateCategoryList();
@@ -207,7 +207,7 @@ function addClient(event) {
     }
 }
 
-// Remove category
+// Remove client
 function delClient(event){
     event.preventDefault();
 

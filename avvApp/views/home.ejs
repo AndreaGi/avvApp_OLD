@@ -14,110 +14,101 @@
 <body>
 <div class="container">
     <div class="row">
-        <div class="col-sm-9">
-            <div class="col-sm-4">
-
+        <div class="col-sm-6" >
+            <div class="infoBar">
+                <p>Bentornato, <% if (user.local.email) { %>
+                    <%=user.local.email%>
+                    <%}else{%>
+                    <%=user.google.email%>
+                    <%}%>
+                </p>
+                <p id="date"></p>
             </div>
-            <div class="col-sm-8" >
-                <div class="infoBar">
-                    <p>Bentornato, <% if (user.local.email) { %>
-                        <%=user.local.email%>
-                        <%}else{%>
-                        <%=user.google.email%>
-                        <%}%>
-                    </p>
-                    <p id="date"></p>
+
+            <% if(user.documents.length > 0){
+
+                var completeCategory = "";
+                var categories =  user.categories;
+
+                    for(var i=0 ; i<categories.length; i++){
+                var category = categories[i];
+            %>
+            <div class="panel panel-default ">
+                <div class="panel-heading">
+                    <h3 class="catTitle" style="color:<%=category.color%>"><%=category.name%></h3>
                 </div>
+                <ul class="table sortable" rel="<%=category._id%>" style="background-color: <%=category.color%>">
 
-                <% if(user.documents.length > 0){
+                    <% var documents = [];
+                            for( var index = 0; index < user.documents.length; index++){
+                        var document = user.documents[index];
+                            if(document.categoryId == category._id && document.isComplete == false) {
+                        var client = "";
+                        user.clients.forEach(function (elem, index) {
+                            if (elem._id == document.clientId) {
+                                client = elem;
+                            }
+                        });
+                    %>
+                    <li class="draggable" rel="<%=document._id%>">
+                        <h4 class="catTitle"><i class="fa fa-bars"></i><%=client.name%> - <%=document.title%><i rel="<%=document._id%>" class="fa fa-chevron-right"></i></h4>
+                    </li>
 
-                    var completeCategory = "";
-                    var categories =  user.categories;
+                    <%            }
 
-                for(var i=0 ; i<categories.length; i++){
-                    var category = categories[i];
-                    if( category.name != "Completate" ){ %>
-                <div class="panel panel-default ">
-                    <div class="panel-heading">
-                        <h3 class="catTitle" style="color:<%=category.color%>"><%=category.name%></h3>
-                    </div>
-                    <ul class="table sortable" rel="<%=category._id%>">
+                    }
+                    %>
+                </ul>
+            </div>
 
-                        <% var documents = [];
-                           for( var index = 0; index < user.documents.length; index++){
-                               var document = user.documents[index];
-                               if(document.categoryId == category._id) {
-                                   var client = "";
-                                   user.clients.forEach(function (elem, index) {
-                                       if (elem._id == document.clientId) {
-                                           client = elem;
-                                       }
-                                   });
-                        %>
-                        <li class="draggable">
-                            <h4 class="catTitle"><i class="fa fa-bars"></i><%=client.name%> - <%=document.title%><i rel="<%=document._id%>" class="fa fa-chevron-right"></i></h4>
-                        </li>
-
-                       <%            }
-
-                                }
-                        %>
-                        </ul>
-                </div>
-                <%
-                    }else{ completeCategory = categories[i]}
-                %>
-
-                <% }
+            <% }
                     if( user.showComplete){
-                %>
-                <div class="panel panel-default ">
-                    <div class="panel-heading">
-                        <h3 class="catTitle" style="color:<%=completeCategory.color%>"><%=completeCategory.name%></h3>
-                    </div>
-                    <ul class="table sortable" rel="<%=completeCategory._id%>">
-                        <% var documents = [];
-                                for( var index = 0; index < user.documents.length; index++){
-                            var document = user.documents[index];
-                                if(document.categoryId == completeCategory._id) {
-                            var client = "";
-                            user.clients.forEach(function (elem, index) {
-                                if (elem._id == document.clientId) {
-                                    client = elem;
-                                }
-                            });
-                        %>
-                        <li class="draggable">
-                            <h4 class="catTitle"><i class="fa fa-bars"></i><%=client.name%> - <%=document.title%><i rel="<%=document._id%>" class="fa fa-chevron-right"></i></h4>
-                        </li>
-
-                        <%            }
-
-                        }
-                        %>
-                    </ul>
+            %>
+            <div class="panel panel-default ">
+                <div class="panel-heading">
+                    <h3 class="catTitle" style="color:green">Completate</h3>
                 </div>
-                <%
-                }
-                 %>
+                <ul class="table sortable"  id="completeCat">
+                    <% var documents = [];
+                            for( var index = 0; index < user.documents.length; index++){
+                        var document = user.documents[index];
+                            if(document.isComplete) {
+                        var client = "";
+                        user.clients.forEach(function (elem, index) {
+                            if (elem._id == document.clientId) {
+                                client = elem;
+                            }
+                        });
+                    %>
+                    <li class="draggable" rel="<%=document._id%>">
+                        <h4 class="catTitle"><i class="fa fa-bars"></i><%=client.name%> - <%=document.title%><i rel="<%=document._id%>" class="fa fa-chevron-right"></i></h4>
+                    </li>
+
+                    <%            }
+
+                    }
+                    %>
+                </ul>
+            </div>
+            <%
+            }
+            %>
 
 
-                <%}else{%>
-                <p class="well" style="background-color: #f2dede;">Non ci sono pratiche da visualizzare</p>
-                <%}%>
+            <%}else{%>
+            <p class="well" style="background-color: #f2dede;">Non ci sono pratiche da visualizzare</p>
+            <%}%>
 
-                <div id="menu">
+            <div id="menu">
 
-                    <div class="settings">
-                        <button type="button" class="btn btn-default" onclick="location.href='setup'" style="width: 25%;">
-                            <h3><span class="fa fa-cogs"></span> Setup</h3>
-                        </button>
-                        <button type="button" class="btn btn-default" onclick="location.href='document'" style="width:73%; float: right">
-                            <h3><span class="fa fa-file-text"></span> Aggiungi pratica</h3>
-                        </button>
-                    </div>
+                <div class="settings">
+                    <button type="button" class="btn btn-default" onclick="location.href='setup'" style="width: 25%;">
+                        <h3><span class="fa fa-cogs"></span> Setup</h3>
+                    </button>
+                    <button type="button" class="btn btn-default" onclick="location.href='document'" style="width:73%; float: right">
+                        <h3><span class="fa fa-file-text"></span> Aggiungi pratica</h3>
+                    </button>
                 </div>
-
             </div>
         </div>
     </div>

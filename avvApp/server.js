@@ -21,6 +21,8 @@ mongoose.connect(configDB.url); // connect to our database
 
 require('./config/passport')(passport); // pass passport for configuration
 
+app.disable('etag');
+
 app.use("/style", express.static(__dirname + "/style"));
 app.use("/app/javascript", express.static(__dirname + "/app/javascript"));
 
@@ -42,6 +44,7 @@ app.use(flash()); // use connect-flash for flash messages stored in session
 require('./app/routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
 require('./app/routes_setup.js')(app, passport); // load our routes and pass in our app and fully configured passport
 require('./app/routes_document.js')(app, passport); // load our routes and pass in our app and fully configured passport
+require('./app/routes_home.js')(app, passport); // load our routes and pass in our app and fully configured passport
 
 // launch ======================================================================
 app.listen(port);

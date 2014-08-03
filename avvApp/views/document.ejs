@@ -16,99 +16,76 @@
 <body>
 <div class="container">
     <div class="row">
-        <div class="col-sm-9">
-            <div class="col-sm-4">
-                <div id="menu">
-                    <div class="infoBar">
+        <div class="col-sm-6" >
+            <% if(document == null){%>
 
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-8" >
+            <!-- New DOCUMENT -->
+            <h2 id="pageTitle"><span class="fa fa-file-text"></span> Nuova Pratica</h2>
+            <%}else{%>
+            <h2 id="pageTitle"><span class="fa fa-file-text"></span><%=document.title%></h2>
+            <%}%>
+
+            <form action="/addDocument" method="PUT" id="addDocument">
                 <% if(document == null){%>
-
-                <!-- New DOCUMENT -->
-
-                <h2 id="pageTitle"><span class="fa fa-file-text"></span> Nuova Pratica</h2>
-
-                <form action="/addDocument" method="PUT" id="addDocument">
-                    <input type="hidden" id="documentId" />
-                    <h3>Title</h3>
-                    <input type="text" id="docTitle" class="form-control">
-
-                    <select id="clientPicker" class="clientPicker picker">
-                        <option></option>
-                    </select>
-                    <select id="catPicker" class="catPicker picker">
-                        <option></option>
-                    </select>
-
-                    <div class="clearer"></div>
-
-
-                    <textarea id="body" class="form-control" rows="4">
-
-                    </textarea>
-
-                    <% if(document != null){%>
-                    <h3>Completata</h3>
-                    <%}%>
-
-                    <div class="clearer"></div>
-
-                    <div class="settings">
-                        <button type="button" class="btn btn-default" onclick="location.href='home'" style="width: 25%;">
-                            <h3><span class="fa fa-reply"></span> Indietro</h3>
-                        </button>
-                        <button id="btnInsertDoc" type="button" class="btn btn-default" style="width:73%; float: right">
-                            <h3><span class="fa fa-file-text"></span> Aggiungi pratica</h3>
-                        </button>
-                    </div>
-                </form>
-
+                <h3>Title</h3>
+                <input type="text" id="docTitle" class="form-control">
                 <%}else{%>
-
-                <!-- Existing Document -->
-                <h2 id="pageTitle"><span class="fa fa-file-text"></span><%=document.title%></h2>
-                <form action="/addDocument" method="PUT" id="addDocument">
-                <input type="hidden" id="documentId" value="<%=document._id%>" />
-
-                    <input type="text" id="docTitle" class="form-control">
-
-                    <select id="clientPicker" class="clientPicker picker">
-                        <option></option>
-                    </select>
-                    <select id="catPicker" class="catPicker picker">
-                        <option></option>
-                    </select>
-
-                    <div class="clearer"></div>
-
-                    <textarea id="body" class="form-control" rows="4">
-
-                    </textarea>
-
-                    <div class="clearer"></div>
-
-                    <div class="settings">
-                        <button type="button" class="btn btn-default" onclick="location.href='home'" style="width: 25%;">
-                            <h3><span class="fa fa-reply"></span> Indietro</h3>
-                        </button>
-                        <button id="btnInsertDoc" type="button" class="btn btn-default" style="width:73%; float: right">
-                            <h3><span class="fa fa-file-text"></span> Aggiorna</h3>
-                        </button>
-                    </div>
-                </form>
-
+                <input type="hidden" id="docTitle" class="form-control">
                 <%}%>
 
-            </div>
+                <input type="hidden" id="documentId" />
+
+                <select id="clientPicker" class="clientPicker picker">
+                    <option></option>
+                </select>
+                <select id="catPicker" class="catPicker picker">
+                    <option></option>
+                </select>
+
+                <div class="clearer"></div>
+
+
+                <textarea id="body" class="form-control" rows="4">
+
+                </textarea>
+
+                <% if(document != null){%>
+                <h3 id="isComplete">Completata</h3>
+                <%}%>
+
+                <div class="clearer"></div>
+
+                <div class="settings">
+                    <button type="button" class="btn btn-default" onclick="location.href='../home'" style="width: 25%;">
+                        <h3><span class="fa fa-reply"></span> Indietro</h3>
+                    </button>
+                    <% if(document != null){%>
+                    <button id="btnModifyDoc" type="button" class="btn btn-default" style="width:73%; float: right">
+                        <h3><span class="fa fa-file-text"></span> Salva pratica</h3>
+                    </button>
+                    <%}else{%>
+                    <button id="btnInsertDoc" type="button" class="btn btn-default" style="width:73%; float: right">
+                        <h3><span class="fa fa-file-text"></span> Aggiungi pratica</h3>
+                    </button>
+                    <%}%>
+                </div>
+            </form>
+
+
         </div>
     </div>
 
     <!-- Scripts -->
     <script src="../app/javascript/document.js"></script>
     <script src="//cdn.jsdelivr.net/select2/3.4.8/select2.min.js"></script>
+
+    <%if(document!=null){%>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            fillDocumentValues(JSON.parse('<%-JSON.stringify(document._id)%>'));
+        });
+    </script>
+    <%}%>
 
 </body>
 </html>

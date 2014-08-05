@@ -3,7 +3,7 @@
 ##Technology Used
 - Node.js
 - MongoDB
-- Google Bootstrap
+- Bootstrap
 - FontAwesome
 
 ##Goal

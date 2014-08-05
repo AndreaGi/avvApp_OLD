@@ -1,6 +1,6 @@
 {
-  "name": “avvApp”,
-  "main": “home.html”,
+  "name": "avvApp",
+  "main": "home.html",
   "window": {
     "toolbar": false,
     "width": 585,

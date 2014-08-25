@@ -11,7 +11,9 @@ var userSchema = mongoose.Schema({
 
     local            : {
         email        : {type: String, set: toLower},
-        password     : String
+        password     : String,
+        activationCode   : String,
+        active       : {type: Boolean, default:false}
     },
     google           : {
         id           : String,

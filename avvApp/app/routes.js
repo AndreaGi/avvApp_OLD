@@ -33,6 +33,11 @@ module.exports = function(app, passport) {
         });
     });
 
+    //ACCOUNT ACTIVATION
+    app.get('/accountActivation', function(req, res){
+        res.render('activation.ejs');
+    });
+
 
 // =============================================================================
 // AUTHENTICATE (FIRST LOGIN) ==================================================
@@ -60,7 +65,7 @@ module.exports = function(app, passport) {
 
 		// process the signup form
 		app.post('/signup', passport.authenticate('local-signup', {
-			successRedirect : '/home', // redirect to the secure profile section
+			successRedirect : '/accountActivation', // redirect to the secure profile section
 			failureRedirect : '/signup', // redirect back to the signup page if there is an error
 			failureFlash : true // allow flash messages
 		}));
@@ -130,6 +135,14 @@ module.exports = function(app, passport) {
 			res.redirect('/profile');
 		});
 	});
+
+
+// ACCOUNT ACTIVATION
+//
+    app.post('/accountActivation', function(req, res){
+        var email = req.email;
+        var key = req.key;
+    });
 
 
 };

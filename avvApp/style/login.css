@@ -1,0 +1,9 @@
+.loginContainer{
+    width: 500px;
+}
+
+.loginContainer .jumbotron{
+    border: 1px solid #dddddd;
+    box-shadow: 4px 4px 4px #999;
+
+}

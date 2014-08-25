@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+<head>
+    <title>Register on AvvAPP</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../style/login.css">
+    <link rel="stylesheet" href="../style/common.css">
+    <style>
+        body 		{ padding-top:80px; }
+    </style>
+</head>
+<body>
+<div class="container loginContainer">
+    <div class="col-6 appContainer" >
+
+        <h1><span class="fa fa-sign-in"></span> Attiva Account</h1>
+
+        <% if (message.length > 0) { %>
+        <div class="alert alert-danger"><%= message %></div>
+        <% } %>
+
+        <!-- ACTIVATION FORM -->
+        <form action="/accountActivation" method="post">
+            <div class="form-group">
+                <label>Email</label>
+                <input type="text" class="form-control" name="email">
+            </div>
+            <div class="form-group">
+                <label>Key</label>
+                <input type="text" class="form-control" name="key">
+            </div>
+
+            <button type="submit" class="btn btn-warning btn-lg">Attiva</button>
+        </form>
+
+        <hr>
+
+        <p>Hai già un'account? <a href="/login">Login</a></p>
+        <p>Oppure va alla  <a href="/">home</a>.</p>
+
+    </div>
+</div>
+</body>
+</html>

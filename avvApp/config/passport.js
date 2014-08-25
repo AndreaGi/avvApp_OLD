@@ -2,6 +2,17 @@
 var LocalStrategy    = require('passport-local').Strategy;
 var GoogleStrategy   = require('passport-google-oauth').OAuth2Strategy;
 
+//Load the mailer
+var nodemailer = require('nodemailer');
+// create reusable transporter object using SMTP transport
+var transporter = nodemailer.createTransport({
+    service: 'Gmail',
+    auth: {
+        user: 'avvapp.noreply@gmail.com',
+        pass: ''
+    }
+});
+
 // load up the user model
 var User       = require('../app/models/user');
 
@@ -50,10 +61,12 @@ module.exports = function(passport) {
 
                 // if no user is found, return the message
                 if (!user)
-                    return done(null, false, req.flash('loginMessage', 'No user found.'));
+                    return done(null, false, req.flash('loginMessage', 'Utente non trovato.'));
 
-                if (!user.validPassword(password))
-                    return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.'));
+                if (!user.validPassword(password) )
+                    return done(null, false, req.flash('loginMessage', 'Oops! Password errata.'));
+                if( !user.active)
+                    return done(null, false, req.flash('loginMessage', 'Devi attivare il tuo account prima di accedere.'));
 
                 // all is well, return user
                 else
@@ -95,12 +108,22 @@ module.exports = function(passport) {
 
                         newUser.local.email    = email;
                         newUser.local.password = newUser.generateHash(password);
+                        newUser.activationCode = generateActivationString();
 
                         newUser.showComplete = true;
 
                         newUser.save(function(err) {
                             if (err)
                                 throw err;
+
+                            var emailToSend = getMailOptions(newUser.local.email, newUser.activationCode);
+                            transporter.sendMail(emailToSend, function(error, info){
+                                if(error){
+                                    console.log(error);
+                                }else{
+                                    console.log('Message sent: ' + info.response);
+                                }
+                            });
 
                             return done(null, newUser);
                         });
@@ -206,3 +229,30 @@ module.exports = function(passport) {
     }));
 
 };
+
+function generateActivationString()
+{
+    var text = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+    for( var i=0; i < 7; i++ )
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+    return text;
+}
+
+function getMailOptions(userEmail, key)
+{
+    var mailOptions = {
+        from: 'avvApp© <avvapp.noreply@gmail.com>', // sender address
+        to: userEmail, // list of receivers
+        subject: 'Attiva il tuo account avvApp!', // Subject line
+        text: 'Benvenuto su avvApp, attiva ora il tuo account usando la chiave segreta: ' + key, // plaintext body
+        html: '<b>Benvenuto su avvApp,</b>' +
+            '<br><p>La tua chiave segreta per attivare il tuo account è: ' + key + '</p>' +
+            '<br>' +
+            '<p>Saluti,</p>' +
+            '<p>Il team di avvApp</p>' // html body
+    };
+    return mailOptions;
+}

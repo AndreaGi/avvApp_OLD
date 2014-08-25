@@ -1,3 +1,15 @@
+body{
+    background-color: #cccccc;
+}
+
+.appContainer{
+    padding: 60px 48px;
+    background-color: #eee;
+    border-radius: 6px;
+    border: 1px solid #999;
+    box-shadow: 8px 8px 8px #999;
+}
+
 div.settings button{
     clear: both;
     max-width: 100%;

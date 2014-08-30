@@ -34,3 +34,21 @@ db/data/local.0
 db/data/local.ns
 
 db/data/mongod.lock
+
+mongod.lock
+
+db/avvAppDB.0
+
+db/avvAppDB.ns
+
+db/journal/j._0
+
+db/journal/lsn
+
+db/local.0
+
+db/local.ns
+
+local.0
+
+local.ns

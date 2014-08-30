@@ -19,6 +19,9 @@
 	<% if (message.length > 0) { %>
 		<div class="alert alert-danger"><%= message %></div>
 	<% } %>
+        <% if (loginMessage.length > 0) { %>
+		<div class="alert alert-success"><%= loginMessage %></div>
+	<% } %>
 
 	<!-- LOGIN FORM -->
 	<form action="/login" method="post">

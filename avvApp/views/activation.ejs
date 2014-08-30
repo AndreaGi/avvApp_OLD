@@ -14,10 +14,13 @@
 <div class="container loginContainer">
     <div class="col-6 appContainer" >
 
-        <h1><span class="fa fa-sign-in"></span> Attiva Account</h1>
+        <h1><span class="fa fa-bolt"></span> Attiva Account</h1>
 
-        <% if (message.length > 0) { %>
-        <div class="alert alert-danger"><%= message %></div>
+        <% if ( activationMessage != null && activationMessage.length > 0) { %>
+        <div class="alert alert-info"><%= activationMessage %></div>
+        <% } %>
+        <% if ( errorMessage != null && errorMessage.length > 0) { %>
+        <div class="alert alert-danger"><%= errorMessage %></div>
         <% } %>
 
         <!-- ACTIVATION FORM -->

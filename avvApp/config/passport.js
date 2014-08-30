@@ -65,7 +65,7 @@ module.exports = function(passport) {
 
                 if (!user.validPassword(password) )
                     return done(null, false, req.flash('loginMessage', 'Oops! Password errata.'));
-                if( !user.active)
+                if( !user.local.active)
                     return done(null, false, req.flash('loginMessage', 'Devi attivare il tuo account prima di accedere.'));
 
                 // all is well, return user
@@ -88,35 +88,37 @@ module.exports = function(passport) {
     function(req, email, password, done) {
         if (email)
             email = email.toLowerCase(); // Use lower-case e-mails to avoid case-sensitive e-mail matching
-
         // asynchronous
         process.nextTick(function() {
             // if the user is not already logged in:
-            if (!req.user) {
+            if (!req.user || (req.user.email != email)) {
                 User.findOne({ 'local.email' :  email }, function(err, user) {
                     // if there are any errors, return the error
                     if (err)
                         return done(err);
 
                     // check to see if theres already a user with that email
-                    if (user) {
-                        return done(null, false, req.flash('signupMessage', "Esiste già un'utente con questa email"));
-                    } else {
+                    if (user && user.local.active) {
 
+                        return done(null, false, req.flash('signupMessage', "Esiste già un'utente con questa email"));
+                    }else if(user && user.local.active == false ){
+                        return done(null, user, req.flash('activationMessage', "Hai già registrato l'account, inserisci il codice per attivarlo!"));
+                    } else {
                         // create the user
                         var newUser            = new User();
 
                         newUser.local.email    = email;
                         newUser.local.password = newUser.generateHash(password);
-                        newUser.activationCode = generateActivationString();
+                        newUser.local.activationCode = generateActivationString();
 
                         newUser.showComplete = true;
 
                         newUser.save(function(err) {
-                            if (err)
+                            if (err) {
                                 throw err;
+                            }
 
-                            var emailToSend = getMailOptions(newUser.local.email, newUser.activationCode);
+                            var emailToSend = getMailOptions(newUser.local.email, newUser.local.activationCode);
                             transporter.sendMail(emailToSend, function(error, info){
                                 if(error){
                                     console.log(error);
@@ -124,8 +126,7 @@ module.exports = function(passport) {
                                     console.log('Message sent: ' + info.response);
                                 }
                             });
-
-                            return done(null, newUser);
+                            return done(null, newUser, req.flash('activationMessage', "Ti è stata inviata una mail col codice di attivazione, copialo qui sotto per attivare l'account!") );
                         });
                     }
 
@@ -143,6 +144,9 @@ module.exports = function(passport) {
                 });
             } else {
                 // user is logged in and already has a local account. Ignore signup. (You should log out before trying to create a new account, user!)
+                if(req.user.email == email && req.user.local.active == false){
+                    return done(null, req.user, req.flash('activationMessage', "Hai già registrato l'account, inserisci il codice per attivarlo!") );
+                }
                 return done(null, req.user);
             }
 

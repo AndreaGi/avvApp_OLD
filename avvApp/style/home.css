@@ -1,3 +1,13 @@
+.loginContainer{
+    width: 500px;
+}
+
+.loginContainer col-6{
+    border: 1px solid #dddddd;
+    box-shadow: 4px 4px 4px #999;
+
+}
+
 #menu{
     clear: both;
     height: 40px;

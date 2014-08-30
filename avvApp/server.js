@@ -45,6 +45,7 @@ require('./app/routes.js')(app, passport); // load our routes and pass in our ap
 require('./app/routes_setup.js')(app, passport); // load our routes and pass in our app and fully configured passport
 require('./app/routes_document.js')(app, passport); // load our routes and pass in our app and fully configured passport
 require('./app/routes_home.js')(app, passport); // load our routes and pass in our app and fully configured passport
+require('./app/routes_activation.js')(app, passport); // load our routes and pass in our app and fully configured passport
 
 // launch ======================================================================
 app.listen(port);

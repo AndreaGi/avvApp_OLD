@@ -35,7 +35,7 @@ module.exports = function(app, passport) {
 
     //ACCOUNT ACTIVATION
     app.get('/accountActivation', function(req, res){
-        res.render('activation.ejs');
+        res.render('activation.ejs', {activationMessage: req.flash('activationMessage'), errorMessage: req.flash('errorMessage')});
     });
 
 
@@ -47,7 +47,7 @@ module.exports = function(app, passport) {
 		// LOGIN ===============================
 		// show the login form
 		app.get('/login', function(req, res) {
-			res.render('login.ejs', { message: req.flash('loginMessage') });
+			res.render('login.ejs', { message: req.flash('loginMessage'), loginMessage: req.flash('infoLoginMessage') });
 		});
 
 		// process the login form
@@ -135,14 +135,6 @@ module.exports = function(app, passport) {
 			res.redirect('/profile');
 		});
 	});
-
-
-// ACCOUNT ACTIVATION
-//
-    app.post('/accountActivation', function(req, res){
-        var email = req.email;
-        var key = req.key;
-    });
 
 
 };

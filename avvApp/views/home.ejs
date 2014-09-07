@@ -13,15 +13,29 @@
 </head>
 <body>
 <div class="container">
-        <div class="col-sm-6" >
+        <div class="col-6 appContainer" >
             <div class="infoBar">
-                <p>Bentornato, <% if (user.local.email) { %>
+                <p><span class="title">Bentornato,</span> <% if (user.local.email) { %>
                     <%=user.local.email%>
                     <%}else{%>
                     <%=user.google.email%>
                     <%}%>
                 </p>
                 <p id="date"></p>
+                <hr class="fancy-line"></hr>
+            </div>
+
+
+            <div id="menu">
+
+                <div class="settings">
+                    <button type="button" class="btn btn-default" onclick="location.href='setup'" style="width: 25%;">
+                        <h3><span class="fa fa-cogs"></span> Setup</h3>
+                    </button>
+                    <button type="button" class="btn btn-default" onclick="location.href='document'" style="width:73%; float: right">
+                        <h3><span class="fa fa-file-text"></span> Aggiungi pratica</h3>
+                    </button>
+                </div>
             </div>
 
             <% if(user.documents.length > 0){
@@ -98,17 +112,6 @@
             <p class="well" style="background-color: #f2dede;">Non ci sono pratiche da visualizzare</p>
             <%}%>
 
-            <div id="menu">
-
-                <div class="settings">
-                    <button type="button" class="btn btn-default" onclick="location.href='setup'" style="width: 25%;">
-                        <h3><span class="fa fa-cogs"></span> Setup</h3>
-                    </button>
-                    <button type="button" class="btn btn-default" onclick="location.href='document'" style="width:73%; float: right">
-                        <h3><span class="fa fa-file-text"></span> Aggiungi pratica</h3>
-                    </button>
-                </div>
-            </div>
         </div>
 </div>
 <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/jquery-ui.min.js"></script>
